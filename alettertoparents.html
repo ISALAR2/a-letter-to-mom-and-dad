@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Letter to Mom & Dad</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #4a4a4a;
+    }
+
+    /* Sakura Petals Animation Canvas */
+    #sakura-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Content Cards Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      transition: all 0.5s ease-in-out;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hidden {
+      display: none !important;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #880e4f;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    p.intro-text {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn {
+      background: linear-gradient(135deg, #ec407a, #d81b60);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      outline: none;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #ab47bc, #8e24aa);
+      box-shadow: 0 5px 15px rgba(142, 36, 170, 0.3);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 8px 20px rgba(142, 36, 170, 0.4);
+    }
+
+    .btn-back {
+      background: #757575;
+      margin-top: 25px;
+      font-size: 0.95rem;
+      padding: 10px 24px;
+    }
+
+    .btn-back:hover {
+      background: #616161;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Letter Text Styling */
+    .letter-content {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #37474f;
+      text-align: left;
+      white-space: pre-line;
+      background: #fff9fa;
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 4px solid #ec407a;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas for falling sakura leaves -->
+  <canvas id="sakura-canvas"></canvas>
+
+  <div class="container">
+    
+    <!-- PAGE 1: Welcome & Open Button -->
+    <div id="page-1" class="card">
+      <h1>A Letter to Mom & Dad</h1>
+      <p class="intro-text">A special message crafted with love, gratitude, and appreciation.</p>
+      <button class="btn" onclick="goToPage(2)">Open</button>
+    </div>
+
+    <!-- PAGE 2: Selection (Dear Mom / Dear Dad) -->
+    <div id="page-2" class="card hidden">
+      <h1>Choose a Letter</h1>
+      <p class="intro-text">Select who you would like to read first:</p>
+      <div class="button-group">
+        <button class="btn" onclick="showLetter('mom')">Dear Mom</button>
+        <button class="btn btn-secondary" onclick="showLetter('dad')">Dear Dad</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3A: Letter for Mom -->
+    <div id="letter-mom" class="card hidden">
+      <h1>Dear Mom</h1>
+      <div class="letter-content">
+Dear mom this is a appreciation letter to you, the very person who gave me life 23 years ago, i wouldnt be walking this earth without the support and patience you have given me. You have always been there for me mom and i couldnt have asked for more than you as a mother. You would always worry if you did your job as a mother, and im here to tell you, you have surpassed that role of a mother. gracias mama i love you.
+      </div>
+      <button class="btn btn-back" onclick="goToPage(2)">← Back to Options</button>
+    </div>
+
+    <!-- PAGE 3B: Letter for Dad -->
+    <div id="letter-dad" class="card hidden">
+      <h1>Dear Dad</h1>
+      <div class="letter-content">
+Dear dad this is my appreciation letter to you dad, you have raised me to be a good man and you have been the best role model for me over the years and i couldnt ask for more. You are the sole reason why im in a better spot both mentally and physically, you have always pushed for my better needs over yours. you are the most selfless person i know and you killed those expetations as a father. I love you dad and thank you for everything.
+      </div>
+      <button class="btn btn-back" onclick="goToPage(2)">← Back to Options</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Navigation logic between pages
+    function goToPage(pageNum) {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById(`page-${pageNum}`).classList.remove('hidden');
+    }
+
+    function showLetter(person) {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById(`letter-${person}`).classList.remove('hidden');
+    }
+
+    // Sakura Falling Animation
+    const canvas = document.getElementById('sakura-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    class Petal {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height - height;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = Math.random() * 1.2 + 0.8;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.angle = Math.random() * 360;
+        this.spin = Math.random() * 0.02 - 0.01;
+        this.opacity = Math.random() * 0.5 + 0.5;
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y / 30) + this.speedX;
+        this.angle += this.spin;
+
+        if (this.y > height) {
+          this.y = -20;
+          this.x = Math.random() * width;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
+        
+        // Draw sakura petal shape
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, this.size / 3, 0, this.size);
+        ctx.bezierCurveTo(this.size, this.size / 3, this.size / 2, -this.size / 2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const petals = Array.from({ length: 45 }, () => new Petal());
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      petals.forEach(petal => {
+        petal.update();
+        petal.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
